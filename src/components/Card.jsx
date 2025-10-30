@@ -1,31 +1,33 @@
-import { useState } from "react";
-
-function Book({ book, setSelectedBookId, selectedBookId }) {
-    function handleClick() {
-        setSelectedBookId(book.id === selectedBookId ? null : book.id);
-    }
-
+export default function Book({ book, isLoaned, loanInfo, onReturn, onDelete }) {
     return (
-        <div
-            className={`card ${book.id === selectedBookId ? "darkened" : ""}`}
-            onClick={handleClick}
-            key={book.id}>
-            <img
-                className='cardImg'
-                src={book.image || null}
-                alt={book.title || "Book Cover"}
-            />
-            <h3 className='bk-price'>{book.price}</h3>
-            <h3 className='bk-author'>By: {book.author}</h3>
-            <h3 className='learn'>
-                <a
-                    href={book.url}
-                    target='_blank'>
-                    Learn More
-                </a>
-            </h3>
-        </div>
+        <article className={`card ${isLoaned ? "loaned" : ""}`}>
+            <h3>{book.title}</h3>
+            <p className='author'>{book.author}</p>
+            {book.year && <p className='year'>{book.year}</p>}
+
+            {isLoaned ? (
+                <div className='loan-info'>
+                    <p>
+                        <strong>Borrower:</strong> {loanInfo.borrower}
+                    </p>
+                    <p>
+                        <strong>Weeks:</strong> {loanInfo.weeks}
+                    </p>
+                    <button
+                        className='return'
+                        onClick={onReturn}>
+                        Return
+                    </button>
+                </div>
+            ) : null}
+
+            {onDelete && (
+                <button
+                    className='delete-btn'
+                    onClick={onDelete}>
+                    Delete
+                </button>
+            )}
+        </article>
     );
 }
-
-export default Book;

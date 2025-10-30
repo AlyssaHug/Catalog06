@@ -81,6 +81,7 @@
     margin-bottom: 16px;
 }
 .learn,
+.return,
 a {
     text-decoration: none;
     color: #90a8c3;
@@ -97,7 +98,10 @@ a {
 .card.darkened {
     background-color: #27293293;
 }
-
+.return {
+    min-width: 10rem;
+    font-size: 16px;
+}
 /*=====Form Styles=====*/
 
 .form-container {
@@ -146,15 +150,74 @@ dialog {
 /*=====Filter=====*/
 
 .filter {
-    margin-left: 1rem;
-}
-
-.filter select {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: #272932;
     background-color: #90a8c3;
     border: 2px solid #272932;
     border-radius: 12px;
     padding: 4px 16px;
+    margin: 0;
+}
+/*=====Toolbar=====*/
+.manage {
+    color: #90a8c3;
+    background-color: #272932;
+    text-decoration: none;
+
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+    padding: 8px 8px;
+    font-size: 16px;
+    min-width: 8rem;
+}
+.toolbar {
+    display: grid;
+    grid-row-start: initial;
+    justify-content: flex-start;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+/*=====Loan page=====*/
+.loan-section {
+    display: grid;
+    justify-content: center;
+}
+.loan-form {
+    border: 3px solid #272932;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+.submit {
+    text-decoration: none;
+    margin-left: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+    width: 50%;
+    margin-left: 6rem;
+    padding: 6px 12px;
+    font-size: 20px;
+    color: #272932;
+    background-color: #90a8c3;
+}
+.form-row {
+    margin: 8px 4px;
+    display: flex;
+    justify-content: space-between;
+}
+.input {
+    max-width: 11rem;
+    min-width: 11rem;
+    border-radius: 12px;
+    padding: 4px;
+    border: 2px solid #272932;
+}
+.loan-header button {
+    margin: 12px;
+    margin-top: 0;
 }
