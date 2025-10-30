@@ -10,7 +10,7 @@ function Button({ books, setBooks, selectedBookId, setSelectedBookId }) {
     }
 
     function addBook(book) {
-        setBooks([...books, book]);
+        setBooks([...books, { ...book, id: nanoid() }]);
     }
     function updateBook(updatedBook) {
         const updatedBooks = books.map((b) =>

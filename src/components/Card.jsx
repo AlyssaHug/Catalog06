@@ -1,33 +1,27 @@
-export default function Book({ book, isLoaned, loanInfo, onReturn, onDelete }) {
+export default function Book({ book, isLoaned, isSelected, onSelect }) {
+    const imageUrl = book.imageUrl || book.image;
     return (
-        <article className={`card ${isLoaned ? "loaned" : ""}`}>
+        <article
+            className={`card ${isLoaned ? "loaned" : ""} ${
+                isSelected ? "darkened" : ""
+            }`}
+            onClick={onSelect}
+            style={{ cursor: "pointer" }}>
+            {imageUrl ? (
+                <img
+                    src={imageUrl}
+                    alt={book.title}
+                    className='cardImg'
+                    onError={(e) => {
+                        e.target.style.display = "none";
+                        e.target.nextElementSibling.style.display = "flex";
+                    }}
+                />
+            ) : null}
             <h3>{book.title}</h3>
             <p className='author'>{book.author}</p>
             {book.year && <p className='year'>{book.year}</p>}
-
-            {isLoaned ? (
-                <div className='loan-info'>
-                    <p>
-                        <strong>Borrower:</strong> {loanInfo.borrower}
-                    </p>
-                    <p>
-                        <strong>Weeks:</strong> {loanInfo.weeks}
-                    </p>
-                    <button
-                        className='return'
-                        onClick={onReturn}>
-                        Return
-                    </button>
-                </div>
-            ) : null}
-
-            {onDelete && (
-                <button
-                    className='delete-btn'
-                    onClick={onDelete}>
-                    Delete
-                </button>
-            )}
+            {isLoaned && <p className='loaned-badge'>On Loan</p>}
         </article>
     );
 }

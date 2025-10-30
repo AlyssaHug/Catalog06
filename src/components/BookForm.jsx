@@ -13,7 +13,7 @@ function BookForm({ addBook, updateBook, book, closeModal }) {
               pages: "",
               image: "",
               price: "",
-              url: "",
+              imageUrl: "",
           };
 
     const handleSubmit = (e) => {
@@ -105,7 +105,7 @@ function BookForm({ addBook, updateBook, book, closeModal }) {
                             type='url'
                             name='image'
                             placeholder='image URL'
-                            defaultValue={initialValues.url}
+                            defaultValue={initialValues.imageUrl}
                         />
                     </div>
                 </div>

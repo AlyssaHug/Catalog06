@@ -9,27 +9,15 @@ import LoanDetails from "./components/LoanDetails";
 
 function App() {
     const [books, setBooks] = useState(() => {
-        const savedBooks = localStorage.getItem("books");
-        return savedBooks ? JSON.parse(savedBooks) : [];
+        const s = localStorage.getItem("books");
+        return s ? JSON.parse(s) : [];
     });
-    const [filter, setFilter] = useState("");
-    const [selectedBookId, setSelectedBookId] = useState(null);
+    useEffect(
+        () => localStorage.setItem("books", JSON.stringify(books)),
+        [books]
+    );
 
-    // Save books to localStorage whenever books state changes
-    useEffect(() => {
-        localStorage.setItem("books", JSON.stringify(books));
-    }, [books]);
-
-    // Get unique authors for filtering
-    const authors = new Set(books.map((book) => book?.author).filter((p) => p));
-
-    // Filter books by author
-    const displayedBooks = filter
-        ? books.filter((book) => book.author === filter)
-        : books;
-
-    const [selected, setSelected] = useState({});
-    /* ---------- Loan actions ---------- */
+    //===Loan statements
     const [loans, setLoans] = useState(() => {
         const s = localStorage.getItem("loans");
         return s ? JSON.parse(s) : {};
@@ -38,15 +26,18 @@ function App() {
         () => localStorage.setItem("loans", JSON.stringify(loans)),
         [loans]
     );
-    const [loanedIds, setLoanedIds] = useState(() => {
-        const saved = localStorage.getItem("loanedIds");
-        return saved ? JSON.parse(saved) : [];
-    });
 
-    useEffect(() => {
-        localStorage.setItem("loanedIds", JSON.stringify(loanedIds));
-    }, [loanedIds]);
+    //==Selections & filter const
+    const [selectedBookId, setSelectedBookId] = useState(null);
+    const [showLoanManager, setShowLoanManager] = useState(false);
+    const [filter, setFilter] = useState("");
 
+    const authors = new Set(books.map((book) => book.author).filter(Boolean));
+    const displayed = filter
+        ? books.filter((book) => book.author === filter)
+        : books;
+
+    //===Loan actions
     const loanBook = (bookId, borrower, weeks) => {
         setLoans((p) => ({ ...p, [bookId]: { borrower, weeks } }));
     };
@@ -57,7 +48,6 @@ function App() {
             return rest;
         });
     };
-    const [showLoanManager, setShowLoanManager] = useState(false);
     return (
         <div className='app'>
             <Header />
@@ -103,16 +93,22 @@ function App() {
                                 selectedBookId={selectedBookId}
                                 setSelectedBookId={setSelectedBookId}
                             />
-                            {/* ────── Catalog ────── */}
+
+                            {/* ────── Catalog Grid ────── */}
                             <div className='books'>
-                                {displayedBooks.map((book) => (
+                                {displayed.map((book) => (
                                     <Book
                                         key={book.id}
                                         book={book}
-                                        isLoaned={loanedIds.includes(book.id)}
-                                        onToggle={() => toggleLoan(book.id)}
-                                        selectedBookId={selectedBookId}
-                                        setSelectedBookId={setSelectedBookId}
+                                        isLoaned={!!loans[book.id]}
+                                        isSelected={selectedBookId === book.id}
+                                        onSelect={() =>
+                                            setSelectedBookId((prev) =>
+                                                prev === book.id
+                                                    ? null
+                                                    : book.id
+                                            )
+                                        } // ← TOGGLE
                                     />
                                 ))}
                             </div>
