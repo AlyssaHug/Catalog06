@@ -116,11 +116,6 @@ function App() {
                                     />
                                 ))}
                             </div>
-                            {displayedBooks.length === 0 && (
-                                <p className='empty'>
-                                    No books yet – add some!
-                                </p>
-                            )}
                         </div>
                     </>
                 )}
