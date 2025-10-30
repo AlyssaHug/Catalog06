@@ -221,3 +221,16 @@ dialog {
     margin: 12px;
     margin-top: 0;
 }
+.unavailable {
+    border: 3px solid #272932;
+    border-radius: 12px;
+    padding: 24px;
+    display: grid;
+    justify-content: center;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+.msg {
+    display: flex;
+    flex-direction: column;
+}
