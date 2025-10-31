@@ -1,12 +1,19 @@
-export default function Book({ book, isLoaned, isSelected, onSelect }) {
+export default function Book({
+    book,
+    isLoaned,
+    loanInfo,
+    onReturn,
+    isSelected,
+    onSelect,
+}) {
     const imageUrl = book.imageUrl || book.image;
     return (
         <article
             className={`card ${isLoaned ? "loaned" : ""} ${
                 isSelected ? "darkened" : ""
             }`}
-            onClick={onSelect}
-            style={{ cursor: "pointer" }}>
+            onClick={onSelect} // ← click to select
+            style={{ cursor: onSelect ? "pointer" : "default" }}>
             {imageUrl ? (
                 <img
                     src={imageUrl}
@@ -21,7 +28,28 @@ export default function Book({ book, isLoaned, isSelected, onSelect }) {
             <h3>{book.title}</h3>
             <p className='author'>{book.author}</p>
             {book.year && <p className='year'>{book.year}</p>}
-            {isLoaned && <p className='loaned-badge'>On Loan</p>}
+
+            {/* Loan info */}
+            {isLoaned && loanInfo && (
+                <div className='loan-info'>
+                    <p>
+                        <strong>Borrower:</strong> {loanInfo.borrower}
+                    </p>
+                    <p>
+                        <strong>Weeks:</strong> {loanInfo.weeks}
+                    </p>
+                    {onReturn && (
+                        <button
+                            className='return'
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onReturn();
+                            }}>
+                            Return
+                        </button>
+                    )}
+                </div>
+            )}
         </article>
     );
 }
