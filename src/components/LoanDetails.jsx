@@ -13,7 +13,6 @@ export default function LoanManager({
     const [weeks, setWeeks] = useState("1");
     const [toast, setToast] = useState("");
 
-    // Only books NOT loaned
     const availableBooks = books.filter((b) => !loans[b.id]);
     const isFormDisabled = availableBooks.length === 0;
 
@@ -51,7 +50,6 @@ export default function LoanManager({
 
             {toast && <div className='toast'>{toast}</div>}
 
-            {/* ────── LOAN FORM OR UNAVAILABLE MESSAGE ────── */}
             {isFormDisabled ? (
                 <section className='unavailable'>
                     <p className='msg'>
@@ -121,8 +119,6 @@ export default function LoanManager({
                     </form>
                 </section>
             )}
-
-            {/* ────── CURRENTLY ON LOAN ────── */}
             <section className='loaned-section'>
                 <h2>Currently on loan</h2>
                 {loanedBooks.length === 0 ? (

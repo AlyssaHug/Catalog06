@@ -62,7 +62,6 @@ function App() {
                     />
                 ) : (
                     <>
-                        {/* ────── Toolbar ────── */}
                         <div className='toolbar'>
                             <div>
                                 <select
@@ -94,7 +93,6 @@ function App() {
                                 setSelectedBookId={setSelectedBookId}
                             />
 
-                            {/* ────── Catalog Grid ────── */}
                             <div className='books'>
                                 {displayed.map((book) => (
                                     <Book
@@ -108,7 +106,7 @@ function App() {
                                                     ? null
                                                     : book.id
                                             )
-                                        } // ← TOGGLE
+                                        }
                                     />
                                 ))}
                             </div>

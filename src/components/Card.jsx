@@ -12,7 +12,7 @@ export default function Book({
             className={`card ${isLoaned ? "loaned" : ""} ${
                 isSelected ? "darkened" : ""
             }`}
-            onClick={onSelect} // ← click to select
+            onClick={onSelect}
             style={{ cursor: onSelect ? "pointer" : "default" }}>
             {isLoaned && <div className='loan-banner'>Loaned Out!</div>}
             {imageUrl ? (
@@ -30,7 +30,6 @@ export default function Book({
             <p className='author'>{book.author}</p>
             {book.year && <p className='year'>{book.year}</p>}
 
-            {/* Loan info */}
             {isLoaned && loanInfo && (
                 <div className='loan-info'>
                     <p>
