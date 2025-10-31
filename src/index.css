@@ -63,7 +63,7 @@
 }
 /*=====Book card=====*/
 .card {
-    max-width: 200px;
+    width: 200px;
     max-height: 300px;
     position: relative;
     align-items: center;
@@ -71,6 +71,7 @@
     border-radius: 32px;
     text-align: center;
     margin-bottom: 6px;
+    overflow: visible;
 }
 
 .bk-price {
@@ -93,7 +94,8 @@ a {
     padding: 10px;
 }
 .cardImg {
-    max-width: 200px;
+    max-width: 180px;
+    margin-top: 0.4rem;
 }
 .card.darkened {
     background-color: #27293293;
@@ -238,4 +240,18 @@ dialog {
     height: auto;
     padding: 4px;
     min-height: max-content;
+}
+.loan-banner {
+    position: absolute;
+    top: -12px;
+    background: #dcb46e; /* Teal */
+    color: #2d210e;
+    border-radius: 24px;
+    width: 90%;
+    margin-left: 0.6rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 6px 0;
+    z-index: 10;
 }

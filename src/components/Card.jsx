@@ -14,6 +14,7 @@ export default function Book({
             }`}
             onClick={onSelect} // ← click to select
             style={{ cursor: onSelect ? "pointer" : "default" }}>
+            {isLoaned && <div className='loan-banner'>Loaned Out!</div>}
             {imageUrl ? (
                 <img
                     src={imageUrl}
